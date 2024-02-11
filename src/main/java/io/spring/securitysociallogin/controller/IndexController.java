@@ -1,11 +1,7 @@
 package io.spring.securitysociallogin.controller;
 
-import java.util.Map;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
+import io.spring.securitysociallogin.model.PrincipalUser;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,20 +10,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class IndexController {
 
   @GetMapping("/")
-  public String index(Model model, Authentication authentication, @AuthenticationPrincipal
-      OAuth2User oAuth2User) {
+  public String index(Model model, @AuthenticationPrincipal
+  PrincipalUser principalUser) {
 
-    OAuth2AuthenticationToken auth2AuthenticationToken = (OAuth2AuthenticationToken) authentication;
-    if (null != auth2AuthenticationToken) {
-      Map<String, Object> attributes = oAuth2User.getAttributes();
-      String name = (String) attributes.get("name");
+    if (null != principalUser) {
+      // OAuth2나 Oidc나 providerUser가 세팅이 되어 있어서 분기 안 해도 된다
+//      String username = null;
+//      if (authentication instanceof OAuth2AuthenticationToken) {
+//        username = OAuth2Utils.oAuth2Username((OAuth2AuthenticationToken) authentication,
+//            principalUser);
+//      } else {
+//        username = principalUser.providerUser().getUsername();
+//      }
+      String username = principalUser.providerUser().getUsername();
 
-      if (auth2AuthenticationToken.getAuthorizedClientRegistrationId().equals("naver")) {
-        Map<String, Object> response =  (Map<String, Object>)attributes.get("response");
-        name = (String) response.get("name");
-      }
-
-      model.addAttribute("user", name);
+      model.addAttribute("user", username);
+      model.addAttribute("provider", principalUser.providerUser().getProvider());
     }
 
     return "index";
