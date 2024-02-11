@@ -17,15 +17,4 @@ public class OAuth2Utils {
     return Attributes.builder()
         .subAttributes(subAttributes).build();
   }
-
-  public  static Attributes getOtherAttributes(OAuth2User oAuth2User, String subAttributeKey, String otherAttributeKey) {
-    Map<String, Object> subAttributes = (Map<String, Object>) oAuth2User.getAttributes()
-        .get(subAttributeKey);
-    Map<String, Object> otherAttributes = (Map<String, Object>) oAuth2User.getAttributes()
-        .get(otherAttributeKey);
-
-    return Attributes.builder()
-        .subAttributes(subAttributes)
-        .otherAttributes(otherAttributes).build();
-  }
 }
