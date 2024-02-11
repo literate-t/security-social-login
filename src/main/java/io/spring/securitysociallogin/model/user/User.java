@@ -1,4 +1,4 @@
-package io.spring.securitysociallogin.model;
+package io.spring.securitysociallogin.model.user;
 
 import java.util.List;
 import lombok.Builder;

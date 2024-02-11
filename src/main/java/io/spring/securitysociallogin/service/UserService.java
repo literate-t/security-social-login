@@ -1,7 +1,7 @@
 package io.spring.securitysociallogin.service;
 
 import io.spring.securitysociallogin.model.ProviderUser;
-import io.spring.securitysociallogin.model.User;
+import io.spring.securitysociallogin.model.user.User;
 import io.spring.securitysociallogin.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
