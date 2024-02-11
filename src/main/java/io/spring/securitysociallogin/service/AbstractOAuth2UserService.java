@@ -1,15 +1,12 @@
 package io.spring.securitysociallogin.service;
 
-import io.spring.securitysociallogin.model.GoogleUser;
-import io.spring.securitysociallogin.model.KeycloakUser;
-import io.spring.securitysociallogin.model.NaverUser;
+import io.spring.securitysociallogin.converter.ProviderUserConverter;
+import io.spring.securitysociallogin.converter.ProviderUserRequest;
 import io.spring.securitysociallogin.model.ProviderUser;
-import io.spring.securitysociallogin.model.User;
+import io.spring.securitysociallogin.model.user.User;
 import io.spring.securitysociallogin.repository.UserRepository;
 import lombok.Getter;
-import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -22,22 +19,17 @@ public abstract class AbstractOAuth2UserService {
 
   private final UserRepository userRepository;
   private final UserService userService;
+  private final ProviderUserConverter<ProviderUserRequest, ProviderUser> providerUserConverter;
 
-  protected AbstractOAuth2UserService(UserRepository userRepository, UserService userService) {
+  protected AbstractOAuth2UserService(UserRepository userRepository, UserService userService,
+      ProviderUserConverter providerUserConverter) {
     this.userRepository = userRepository;
     this.userService = userService;
+    this.providerUserConverter = providerUserConverter;
   }
 
-  protected ProviderUser providerUser(ClientRegistration clientRegistration, OAuth2User oAuth2User) {
-    String registrationId = clientRegistration.getRegistrationId();
-
-    return switch (registrationId) {
-      case REGISTRATION_ID_GOOGLE -> new GoogleUser(oAuth2User, clientRegistration);
-      case REGISTRATION_ID_NAVER -> new NaverUser(oAuth2User, clientRegistration);
-      case REGISTRATION_ID_KEYCLOAK -> new KeycloakUser(oAuth2User, clientRegistration);
-      default -> null;
-    };
-
+  protected ProviderUser providerUser(ProviderUserRequest providerUserRequest) {
+    return providerUserConverter.convert(providerUserRequest);
   }
 
   protected void register(ProviderUser providerUser, OAuth2UserRequest userRequest) {
