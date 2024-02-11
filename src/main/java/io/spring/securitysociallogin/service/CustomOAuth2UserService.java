@@ -2,6 +2,7 @@ package io.spring.securitysociallogin.service;
 
 import io.spring.securitysociallogin.common.converter.ProviderUserConverter;
 import io.spring.securitysociallogin.common.converter.ProviderUserRequest;
+import io.spring.securitysociallogin.model.PrincipalUser;
 import io.spring.securitysociallogin.model.ProviderUser;
 import io.spring.securitysociallogin.repository.UserRepository;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
@@ -34,6 +35,6 @@ public class CustomOAuth2UserService extends AbstractOAuth2UserService implement
     // signup
     super.register(providerUser, userRequest);
 
-    return oAuth2User;
+    return new PrincipalUser(providerUser);
   }
 }

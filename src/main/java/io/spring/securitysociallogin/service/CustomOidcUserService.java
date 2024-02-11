@@ -2,6 +2,7 @@ package io.spring.securitysociallogin.service;
 
 import io.spring.securitysociallogin.common.converter.ProviderUserConverter;
 import io.spring.securitysociallogin.common.converter.ProviderUserRequest;
+import io.spring.securitysociallogin.model.PrincipalUser;
 import io.spring.securitysociallogin.model.ProviderUser;
 import io.spring.securitysociallogin.repository.UserRepository;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;
@@ -35,6 +36,6 @@ public class CustomOidcUserService extends AbstractOAuth2UserService implements 
     // signup
     register(providerUser, userRequest);
 
-    return oidcUser;
+    return new PrincipalUser(providerUser);
   }
 }
