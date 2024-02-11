@@ -1,5 +1,7 @@
 package io.spring.securitysociallogin.service;
 
+import io.spring.securitysociallogin.converter.ProviderUserConverter;
+import io.spring.securitysociallogin.converter.ProviderUserRequest;
 import io.spring.securitysociallogin.model.ProviderUser;
 import io.spring.securitysociallogin.repository.UserRepository;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;
@@ -15,8 +17,9 @@ public class CustomOidcUserService extends AbstractOAuth2UserService implements 
 
   protected CustomOidcUserService(
       UserRepository userRepository,
-      UserService userService) {
-    super(userRepository, userService);
+      UserService userService,
+      ProviderUserConverter<ProviderUserRequest, ProviderUser> providerUserConverter) {
+    super(userRepository, userService, providerUserConverter);
   }
 
   @Override
@@ -25,11 +28,12 @@ public class CustomOidcUserService extends AbstractOAuth2UserService implements 
     OAuth2UserService<OidcUserRequest, OidcUser> oidcUserService = new OidcUserService();
     OidcUser oidcUser = oidcUserService.loadUser(userRequest);
 
+    ProviderUserRequest providerUserRequest = new ProviderUserRequest(clientRegistration, oidcUser);
     // google or naver or keycloak
-    ProviderUser providerUser = super.providerUser(clientRegistration, oidcUser);
+    ProviderUser providerUser = providerUser(providerUserRequest);
 
     // signup
-    super.register(providerUser, userRequest);
+    register(providerUser, userRequest);
 
     return oidcUser;
   }

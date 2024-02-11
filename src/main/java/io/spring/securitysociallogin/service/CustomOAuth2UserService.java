@@ -1,5 +1,7 @@
 package io.spring.securitysociallogin.service;
 
+import io.spring.securitysociallogin.converter.ProviderUserConverter;
+import io.spring.securitysociallogin.converter.ProviderUserRequest;
 import io.spring.securitysociallogin.model.ProviderUser;
 import io.spring.securitysociallogin.repository.UserRepository;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
@@ -13,8 +15,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class CustomOAuth2UserService extends AbstractOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
 
-  public CustomOAuth2UserService(UserRepository userRepository, UserService userService) {
-    super(userRepository, userService);
+  public CustomOAuth2UserService(UserRepository userRepository, UserService userService, ProviderUserConverter<ProviderUserRequest, ProviderUser> providerUserConverter) {
+    super(userRepository, userService, providerUserConverter);
   }
 
   @Override
@@ -23,8 +25,11 @@ public class CustomOAuth2UserService extends AbstractOAuth2UserService implement
     OAuth2UserService<OAuth2UserRequest, OAuth2User> oAuth2UserService = new DefaultOAuth2UserService();
     OAuth2User oAuth2User = oAuth2UserService.loadUser(userRequest);
 
+    ProviderUserRequest providerUserRequest = new ProviderUserRequest(clientRegistration,
+        oAuth2User);
+
     // google or naver or keycloak
-    ProviderUser providerUser = super.providerUser(clientRegistration, oAuth2User);
+    ProviderUser providerUser = providerUser(providerUserRequest);
 
     // signup
     super.register(providerUser, userRequest);
