@@ -1,5 +1,6 @@
-package io.spring.securitysociallogin.model;
+package io.spring.securitysociallogin.model.social;
 
+import io.spring.securitysociallogin.model.OAuth2ProviderUser;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
