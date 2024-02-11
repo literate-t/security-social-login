@@ -2,7 +2,6 @@ package io.spring.securitysociallogin.model.social;
 
 import io.spring.securitysociallogin.model.Attributes;
 import io.spring.securitysociallogin.model.OAuth2ProviderUser;
-import java.util.Map;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
