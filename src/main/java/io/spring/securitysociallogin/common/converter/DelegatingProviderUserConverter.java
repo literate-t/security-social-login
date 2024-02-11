@@ -1,4 +1,4 @@
-package io.spring.securitysociallogin.converter;
+package io.spring.securitysociallogin.common.converter;
 
 import io.spring.securitysociallogin.model.ProviderUser;
 import java.util.Arrays;

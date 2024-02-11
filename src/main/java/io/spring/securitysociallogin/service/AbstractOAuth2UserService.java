@@ -1,7 +1,7 @@
 package io.spring.securitysociallogin.service;
 
-import io.spring.securitysociallogin.converter.ProviderUserConverter;
-import io.spring.securitysociallogin.converter.ProviderUserRequest;
+import io.spring.securitysociallogin.common.converter.ProviderUserConverter;
+import io.spring.securitysociallogin.common.converter.ProviderUserRequest;
 import io.spring.securitysociallogin.model.ProviderUser;
 import io.spring.securitysociallogin.model.user.User;
 import io.spring.securitysociallogin.repository.UserRepository;

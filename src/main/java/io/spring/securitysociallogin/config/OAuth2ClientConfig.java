@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper;
 import org.springframework.security.web.SecurityFilterChain;
 
 @EnableWebSecurity
@@ -40,10 +39,5 @@ public class OAuth2ClientConfig {
     http.logout().logoutSuccessUrl("/");
 
     return http.build();
-  }
-
-  @Bean
-  public GrantedAuthoritiesMapper customAuthorityMapper() {
-    return new CustomAuthorityMapper();
   }
 }

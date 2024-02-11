@@ -1,4 +1,4 @@
-package io.spring.securitysociallogin.converter;
+package io.spring.securitysociallogin.common.converter;
 
 public interface ProviderUserConverter<T, R> {
 

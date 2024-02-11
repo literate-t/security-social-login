@@ -1,4 +1,4 @@
-package io.spring.securitysociallogin.enumeration;
+package io.spring.securitysociallogin.common.enumeration;
 
 public enum OAuthProviderEnum {
   GOOGLE("google"),

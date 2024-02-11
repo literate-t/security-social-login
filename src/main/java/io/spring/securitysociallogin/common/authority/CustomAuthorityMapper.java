@@ -1,4 +1,4 @@
-package io.spring.securitysociallogin.config;
+package io.spring.securitysociallogin.common.authority;
 
 import java.util.Collection;
 import java.util.HashSet;

@@ -1,4 +1,4 @@
-package io.spring.securitysociallogin.util;
+package io.spring.securitysociallogin.common.util;
 
 import io.spring.securitysociallogin.model.Attributes;
 import java.util.Map;

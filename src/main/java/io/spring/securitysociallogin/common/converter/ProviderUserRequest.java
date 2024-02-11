@@ -1,4 +1,4 @@
-package io.spring.securitysociallogin.converter;
+package io.spring.securitysociallogin.common.converter;
 
 import io.spring.securitysociallogin.model.user.User;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;

@@ -1,9 +1,9 @@
-package io.spring.securitysociallogin.converter;
+package io.spring.securitysociallogin.common.converter;
 
-import io.spring.securitysociallogin.enumeration.OAuthProviderEnum;
+import io.spring.securitysociallogin.common.enumeration.OAuthProviderEnum;
 import io.spring.securitysociallogin.model.ProviderUser;
 import io.spring.securitysociallogin.model.social.GoogleUser;
-import io.spring.securitysociallogin.util.OAuth2Utils;
+import io.spring.securitysociallogin.common.util.OAuth2Utils;
 
 public class OAuth2GoogleProviderUserConverter implements ProviderUserConverter<ProviderUserRequest, ProviderUser> {
 
