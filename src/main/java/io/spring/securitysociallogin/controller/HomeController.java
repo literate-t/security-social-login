@@ -10,12 +10,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HomeController {
   @GetMapping("/api/user")
-  public Authentication user(Authentication authentication, @AuthenticationPrincipal OAuth2User oAuth2User) {
-    return authentication;
+  public OAuth2User user(Authentication authentication, @AuthenticationPrincipal OAuth2User oAuth2User) {
+    System.out.println("authentication = " + authentication + ", oAuth2User = "+ oAuth2User);
+    return oAuth2User;
   }
 
   @GetMapping("/api/oidc")
-  public Authentication oidc(Authentication authentication, @AuthenticationPrincipal OidcUser oidcUser) {
-    return authentication;
+  public OidcUser oidc(Authentication authentication, @AuthenticationPrincipal OidcUser oidcUser) {
+    System.out.println("authentication = " + authentication + ", oidcUser = "+ oidcUser);
+    return oidcUser;
   }
 }
