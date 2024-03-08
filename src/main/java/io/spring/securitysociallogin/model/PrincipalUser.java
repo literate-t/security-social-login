@@ -1,13 +1,15 @@
 package io.spring.securitysociallogin.model;
 
-import java.util.Collection;
-import java.util.Map;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.oidc.OidcIdToken;
 import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.security.oauth2.core.user.OAuth2User;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 public record PrincipalUser(ProviderUser providerUser) implements UserDetails, OAuth2User,
     OidcUser {
@@ -59,7 +61,7 @@ public record PrincipalUser(ProviderUser providerUser) implements UserDetails, O
 
   @Override
   public Map<String, Object> getClaims() {
-    return null;
+    return new HashMap<>();
   }
 
   @Override

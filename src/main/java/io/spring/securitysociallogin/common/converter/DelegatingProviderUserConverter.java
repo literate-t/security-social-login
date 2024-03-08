@@ -12,13 +12,14 @@ public class DelegatingProviderUserConverter implements ProviderUserConverter<Pr
   List<ProviderUserConverter<ProviderUserRequest, ProviderUser>> converters;
 
   public DelegatingProviderUserConverter() {
-    List<ProviderUserConverter<ProviderUserRequest, ProviderUser>> providerUserConverters
+    converters
         = Arrays.asList(
         new UserDetailsProviderConverter(),
         new OAuth2GoogleProviderUserConverter(),
         new OAuth2NaverProviderUserConverter(),
-        new OAuth2KakaoProviderUserConverter());
-    converters = List.copyOf(providerUserConverters); // same as Collections.unmodifiableList
+        new OAuth2KakaoProviderUserConverter(),
+        new OAuth2KakaoOidcProviderUserConverter()
+    );
   }
 
   @Override

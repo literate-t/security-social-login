@@ -19,6 +19,8 @@ public class CustomAuthorityMapper implements GrantedAuthoritiesMapper {
   }
 
   private GrantedAuthority mapAuthority(String name) {
+
+    // 구글의 경우에 getAuthority()를 하면 http://google.com/blahblah.email 이런 식이라서 추가 가공이 필요하다
     if (0 < name.lastIndexOf(".")) {
       int index = name.lastIndexOf(".");
       name = "SCOPE_".concat(name.substring(index + 1));

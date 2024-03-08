@@ -28,6 +28,9 @@ public abstract class AbstractOAuth2UserService {
     this.providerUserConverter = providerUserConverter;
   }
 
+  // 컨버터를 이용하 각 프로바이더를 식별한다
+  // 이 방법은 스프링에서 많이 쓰는 방법으로 위임 클래스를 만들고
+  // 위임 클래스 안에서 미리 만들어놓은 클래스들을 반복문을 돌려 적절한 인스턴스를 찾는다
   protected ProviderUser providerUser(ProviderUserRequest providerUserRequest) {
     return providerUserConverter.convert(providerUserRequest);
   }

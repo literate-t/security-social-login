@@ -24,17 +24,20 @@ public class CustomOAuth2UserService extends AbstractOAuth2UserService implement
   public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
     ClientRegistration clientRegistration = userRequest.getClientRegistration();
     OAuth2UserService<OAuth2UserRequest, OAuth2User> oAuth2UserService = new DefaultOAuth2UserService();
+    // 실제 여기에서 인가서버에서 사용자 정보를 가져온다
+    // 어떤 프로바이더인지 식별해야 한다
     OAuth2User oAuth2User = oAuth2UserService.loadUser(userRequest);
 
     ProviderUserRequest providerUserRequest = new ProviderUserRequest(clientRegistration,
         oAuth2User);
 
-    // google or naver or keycloak
+    // google or naver or keycloak인지 식별한다
     ProviderUser providerUser = providerUser(providerUserRequest);
 
-    // signup
+    // 여기에서 DB에 저장하면 되는 것 같다
     super.register(providerUser, userRequest);
 
+    // 토큰이 만들어질 때 이 값이 principal로 들어간다
     return new PrincipalUser(providerUser);
   }
 }

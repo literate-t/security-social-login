@@ -1,17 +1,20 @@
 package io.spring.securitysociallogin.common.converter;
 
-import io.spring.securitysociallogin.common.enumeration.OAuthProviderEnum;
 import io.spring.securitysociallogin.common.util.OAuth2Utils;
 import io.spring.securitysociallogin.model.ProviderUser;
 import io.spring.securitysociallogin.model.social.KakaoUser;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
+
+import static io.spring.securitysociallogin.common.enumeration.OAuthProviderEnum.KAKAO;
 
 public class OAuth2KakaoProviderUserConverter implements
     ProviderUserConverter<ProviderUserRequest, ProviderUser> {
 
   @Override
   public ProviderUser convert(ProviderUserRequest providerUserRequest) {
+
     if (!providerUserRequest.clientRegistration().getRegistrationId()
-        .equals(OAuthProviderEnum.KAKAO.getProvider())) {
+        .equals(KAKAO.getProvider()) && providerUserRequest.oAuth2User() instanceof OidcUser) {
       return null;
     }
 

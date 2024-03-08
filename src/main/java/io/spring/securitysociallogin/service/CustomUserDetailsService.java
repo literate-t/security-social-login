@@ -40,6 +40,7 @@ public class CustomUserDetailsService extends AbstractOAuth2UserService implemen
     ProviderUserRequest providerUserRequest = new ProviderUserRequest(user);
     ProviderUser providerUser = providerUser(providerUserRequest);
 
+    // 토큰이 만들어질 때 이 값이 principal로 들어간다
     return new PrincipalUser(providerUser);
   }
 }
